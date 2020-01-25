@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="pl.edu.pb.wi.projekt.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_daily_steps"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
@@ -22,9 +22,4 @@
         android:name="pl.edu.pb.wi.projekt.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-    <fragment
-        android:id="@+id/stepsFragment"
-        android:name="pl.edu.pb.wi.projekt.StepsFragment"
-        android:label="fragment_steps"
-        tools:layout="@layout/fragment_steps" />
 </navigation>

@@ -50,7 +50,6 @@ public abstract class DailyStepsDatabase extends RoomDatabase {
             super.onOpen(db);
             databaseWriteExecutor.execute(() -> {
                 DailyStepsDao dao = INSTANCE.dailyStepsDao();
-                dao.deleteAll();
             });
         }
     };

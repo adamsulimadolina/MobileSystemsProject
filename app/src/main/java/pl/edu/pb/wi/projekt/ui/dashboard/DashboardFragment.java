@@ -11,15 +11,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.PrimaryKey;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,33 +48,35 @@ public class DashboardFragment extends Fragment implements SensorEventListener {
     private List<DailySteps> dailyStepsList = new ArrayList<DailySteps>();
     private DailyStepsViewModel dailyStepsViewModel;
 
+    private RecyclerView recyclerView;
+    final DailyStepsAdapter adapter = new DailyStepsAdapter();
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         running = true;
+        recyclerView = (RecyclerView) root.findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        recyclerView.setAdapter(adapter);
+
         dailyStepsViewModel = ViewModelProviders.of(this).get(DailyStepsViewModel.class);
         dailyStepsViewModel.findAll().observe(this, new Observer<List<DailySteps>>() {
             @Override
             public void onChanged(List<DailySteps> dailySteps) {
-                dailyStepsList = dailySteps;
+               // dailyStepsList = dailySteps;
+                adapter.setDailySteps(dailySteps);
             }
         });
-
-
-        //dailyStepsList = dailyStepsViewModel.findAll().getValue();
 
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         return root;
     }
+
+
 
     @Override
     public void onResume() {
@@ -87,26 +96,26 @@ public class DashboardFragment extends Fragment implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         Log.d("TRZY", "JEDEN");
         boolean newDay = true;
-        int idx = -1;
         LocalDate date = LocalDate.now();
-        Log.d("MainActivity", "DATA " + date.toString());
-        Log.d("DLUGOSC", Integer.toString(dailyStepsList.size()));
+        //Log.d("MainActivity", "DATA " + date.toString());
+        //Log.d("DLUGOSC", Integer.toString(dailyStepsList.size()));
         for (int i = 0; i < dailyStepsList.size(); i++) {
             Log.d("MainActivity", "LISTA " + i + dailyStepsList.get(i).getDate().toString());
             if (dailyStepsList.get(i).getDate().isEqual(date)) {
-                Log.d("NOWY DZIEN", "ZNALAZLO");
+                //Log.d("NOWY DZIEN", "ZNALAZLO");
                 newDay = false;
 
-            } else newDay = true;
+            }
         }
 
         if (newDay) {
-            Log.d("NOWY DZIEN", Boolean.toString(newDay));
+            //Log.d("NOWY DZIEN", Boolean.toString(newDay));
             DailySteps dailySteps = new DailySteps();
             dailySteps.setDate(date);
             dailySteps.setValue(0);
             dailyStepsViewModel.insert(dailySteps);
             dailyStepsList.add(dailySteps);
+            adapter.setDailySteps(dailyStepsList);
             newDay = false;
         }
         if (running) {
@@ -115,14 +124,12 @@ public class DashboardFragment extends Fragment implements SensorEventListener {
                 if (dailyStepsList.get(i).getDate().isEqual(date)) {
                     dailyStepsList.get(i).setValue(dailyStepsList.get(i).getValue() + 1);
                     dailyStepsViewModel.update(dailyStepsList.get(i));
-                    idx = i;
-                    Log.d("ZNALAZLO", Integer.toString(idx));
+                    adapter.setDailySteps(dailyStepsList);
+                    Log.d("ZNALAZLO", Integer.toString(dailyStepsList.get(i).getId()));
+                    Log.d("ZNALAZLO", dailyStepsList.get(i).getDate().toString());
+                    Log.d("ZNALAZLO", Integer.toString(dailyStepsList.get(i).getValue()));
 
                 }
-            }
-            if (idx != -1) {
-                Log.d("SETTEXT", String.valueOf(dailyStepsList.get(idx).getValue()));
-                textView.setText(String.valueOf(dailyStepsList.get(idx).getValue()));
             }
 
         }
@@ -132,6 +139,62 @@ public class DashboardFragment extends Fragment implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+
+    private class DailyStepsHolder extends RecyclerView.ViewHolder {
+
+
+        private TextView dateTextView;
+        private TextView stepsTextView;
+        private DailySteps dailySteps;
+
+        public DailyStepsHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.daily_steps_item, parent, false));
+
+            dateTextView = itemView.findViewById(R.id.date);
+            stepsTextView = itemView.findViewById(R.id.steps);
+        }
+
+        public void bind(DailySteps dailySteps) {
+            this.dailySteps = dailySteps;
+            dateTextView.setText(dailySteps.getDate().toString());
+            stepsTextView.setText(Integer.toString(dailySteps.getValue()));
+        }
+    }
+
+    private class DailyStepsAdapter extends RecyclerView.Adapter<DailyStepsHolder> {
+
+        @NonNull
+        @Override
+        public DailyStepsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new DailyStepsHolder(getLayoutInflater(), parent);
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        public void onBindViewHolder(@NonNull DailyStepsHolder holder, int position) {
+            if(dailyStepsList != null) {
+                DailySteps dailyStep = dailyStepsList.get(position);
+                if(dailyStep.getDate().isEqual(LocalDate.now())) holder.bind(dailyStep);
+            } else {
+
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            if(dailyStepsList != null) {
+                return dailyStepsList.size();
+            } else {
+                return 0;
+            }
+        }
+
+        public void setDailySteps(List<DailySteps> dailySteps) {
+            dailyStepsList = dailySteps;
+            notifyDataSetChanged();
+        }
     }
 
 }
