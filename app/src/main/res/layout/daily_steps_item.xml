@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rLayMainContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -11,21 +11,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="false"
     android:textAlignment="center"
     android:textColor="@color/text_white"
+    android:textSize="@dimen/date_text"
     android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/daily"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date"
+        android:text="@string/daily_steps"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/date_text"
+        android:paddingTop="@dimen/padding_steps_top"/>
 
     <TextView
         android:id="@+id/steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/date"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/daily"
         android:textAlignment="center"
         android:textColor="@color/text_white"
-        android:textSize="100sp" />
+        android:textSize="@dimen/daily_steps_text"/>
+
+    <TextView
+        android:id="@+id/monthly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/steps"
+        android:text="@string/monthly_steps"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:fontFamily=""
+        android:textSize="@dimen/date_text"
+        android:paddingTop="@dimen/padding_steps_top"/>
+
+    <TextView
+        android:id="@+id/monthly_steps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/monthly"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/daily_steps_text" />
 
 </RelativeLayout>

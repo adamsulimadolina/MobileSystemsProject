@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="200dp"
+    android:background="@drawable/gradient_bg">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:text="@string/w_name"/>
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_custom"
+        android:fontFamily="sans-serif-light"
+        android:padding="@dimen/standard_padding_10"
+        android:inputType="textAutoComplete"
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:text="@string/w_reps"/>
+    <EditText
+        android:id="@+id/edit_reps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="sans-serif-light"
+        android:padding="@dimen/standard_padding_10"
+        android:inputType="number"
+        android:background="@drawable/edittext_custom"
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:text="@string/w_series"/>
+    <EditText
+        android:id="@+id/edit_series"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="@dimen/standard_padding_10"
+        android:fontFamily="sans-serif-light"
+        android:inputType="number"
+        android:background="@drawable/edittext_custom"
+        android:textSize="25sp"  />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_padding_10"
+        android:id="@+id/save"
+        android:text="@string/save_button"/>
+
+</LinearLayout>

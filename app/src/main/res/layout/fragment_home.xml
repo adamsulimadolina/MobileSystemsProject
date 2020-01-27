@@ -1,19 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/text_home"
+    <RelativeLayout
+        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/day_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/main_day_size" />
+
+        <TextView
+            android:id="@+id/month_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_alignBottom="@+id/day_now"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/main_month_size"/>
+
+        <TextView
+            android:id="@+id/year_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/month_now"
+            android:textAlignment="center"
+            android:textColor="@color/text_white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lat_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_layout">
+
+        <TextView
+            android:id="@+id/latlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_labels"
+            android:text="@string/latitude"
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/latTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lon_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lat_layout">
+
+        <TextView
+            android:id="@+id/lonlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_labels"
+            android:text="@string/longitude"
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/lonTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/address_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lon_layout">
+
+        <TextView
+            android:id="@+id/addresslabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_labels"
+            android:text="@string/address"
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/city_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address_layout">
+
+        <TextView
+            android:id="@+id/citylabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_labels"
+            android:text="@string/city"
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/state_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/city_layout">
+
+        <TextView
+            android:id="@+id/statelabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_labels"
+            android:text="@string/state"
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/country_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/state_layout">
+
+        <TextView
+            android:id="@+id/countrylabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_labels"
+            android:text="@string/country"
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/postal_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/country_layout">
+
+        <TextView
+            android:id="@+id/postallabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_labels"
+            android:text="@string/postal_code"
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/postal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+
+</RelativeLayout>

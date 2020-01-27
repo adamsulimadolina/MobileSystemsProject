@@ -2,4 +2,16 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="padding_calendar_top">30dp</dimen>
+    <dimen name="padding_steps_top">60dp</dimen>
+    <dimen name="date_text">20sp</dimen>
+    <dimen name="daily_steps_text">140sp</dimen>
+    <dimen name="padding_labels">3dp</dimen>
+    <dimen name="standard_padding_10">10dp</dimen>
+    <dimen name="standard_padding_30">30dp</dimen>
+    <dimen name="standard_padding_20">20dp</dimen>
+    <dimen name="card_radius1">2dp</dimen>
+    <dimen name="card_elevation">1dp</dimen>
+    <dimen name="main_day_size">200sp</dimen>
+    <dimen name="main_month_size">45sp</dimen>
 </resources>
